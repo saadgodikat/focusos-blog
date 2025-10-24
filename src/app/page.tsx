@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { getAllPosts } from "@/lib/posts";
+import { Post } from "@/types/post";
 
 export default function Home() {
-  const posts = getAllPosts();
+  const posts: Post[] = getAllPosts();
 
   return (
     <main className="max-w-4xl mx-auto p-6 min-h-screen">
@@ -16,7 +17,7 @@ export default function Home() {
       </header>
 
       <div className="space-y-6">
-        {posts.map((post) => (
+        {posts.map((post: Post) => (
           <article 
             key={post.slug} 
             className="border border-gray-200 dark:border-gray-800 p-6 rounded-xl hover:shadow-lg transition-shadow bg-white dark:bg-gray-900"
