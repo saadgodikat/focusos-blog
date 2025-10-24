@@ -35,6 +35,6 @@ export function getPostBySlug(slug: string): Post {
     date: data.date || '',
     description: data.description || '',
     tags: data.tags || [],
-    content,
+    content: content || '',
   } as Post;
 }
