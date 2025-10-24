@@ -14,7 +14,13 @@ export function getAllPosts(): Post[] {
       const filePath = path.join(postsDirectory, fileName);
       const fileContents = fs.readFileSync(filePath, "utf8");
       const { data } = matter(fileContents);
-      return { slug, ...data } as Post;
+      return {
+        slug,
+        title: data.title || '',
+        date: data.date || '',
+        description: data.description || '',
+        tags: data.tags || [],
+      } as Post;
     })
     .sort((a, b) => (a.date < b.date ? 1 : -1));
 }
@@ -23,5 +29,12 @@ export function getPostBySlug(slug: string): Post {
   const filePath = path.join(postsDirectory, `${slug}.mdx`);
   const fileContents = fs.readFileSync(filePath, "utf8");
   const { data, content } = matter(fileContents);
-  return { slug, ...data, content } as Post;
+  return {
+    slug,
+    title: data.title || '',
+    date: data.date || '',
+    description: data.description || '',
+    tags: data.tags || [],
+    content,
+  } as Post;
 }
